@@ -42,3 +42,7 @@ out/
 ### Env files ###
 .env
 .env.local
+!.env.example
+
+### Local uploads ###
+storage/

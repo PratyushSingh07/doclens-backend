@@ -12,3 +12,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
+doclens:
+  storage:
+    path: ${DOCLENS_STORAGE_PATH:./storage}
