@@ -9,7 +9,7 @@ plugins {
 group = "com.pratyush"
 version = "0.0.1-SNAPSHOT"
 
-extra["springAiVersion"] = "1.0.0"
+extra["springAiVersion"] = "2.0.2"
 
 java {
 	toolchain {
