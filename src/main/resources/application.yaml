@@ -16,6 +16,12 @@ spring:
     multipart:
       max-file-size: 25MB
       max-request-size: 25MB
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      embedding:
+        options:
+          model: text-embedding-3-small
 
 doclens:
   storage:

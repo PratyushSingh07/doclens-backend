@@ -9,6 +9,8 @@ plugins {
 group = "com.pratyush"
 version = "0.0.1-SNAPSHOT"
 
+extra["springAiVersion"] = "1.0.0"
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
@@ -17,6 +19,12 @@ java {
 
 repositories {
 	mavenCentral()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
+	}
 }
 
 dependencies {
@@ -29,6 +37,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("tools.jackson.module:jackson-module-kotlin")
 	implementation("org.apache.pdfbox:pdfbox:3.0.3")
+	implementation("org.springframework.ai:spring-ai-starter-model-openai")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
