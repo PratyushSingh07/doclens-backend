@@ -19,8 +19,7 @@ import java.util.UUID
 class DocumentController(
     private val repository: DocumentRepository,
     private val textRepository: DocumentTextRepository,
-    private val storage: DocumentStorage,
-    private val textExtractor: PdfTextExtractor,
+    private val ingestService: DocumentIngestService,
 ) {
 
     @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
@@ -32,22 +31,7 @@ class DocumentController(
                 "Only PDF uploads are allowed",
             )
         }
-        val id = UUID.randomUUID()
-        val path = storage.store(id, file)
-        val saved = repository.save(
-            Document(
-                id = id,
-                filename = file.originalFilename ?: "unnamed.pdf",
-                contentType = file.contentType!!,
-                sizeBytes = file.size,
-                storagePath = path.toString(),
-            )
-        )
-
-        val text = textExtractor.extract(path)
-        textRepository.save(DocumentText(documentId = id, content = text))
-
-        return DocumentResponse.from(saved)
+        return DocumentResponse.from(ingestService.ingest(file))
     }
 
     @GetMapping

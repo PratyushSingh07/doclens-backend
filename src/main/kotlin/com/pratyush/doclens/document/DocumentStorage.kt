@@ -20,4 +20,8 @@ class DocumentStorage(
         }
         return target
     }
+
+    fun delete(id: UUID) {
+        Files.deleteIfExists(root.resolve("$id.pdf"))
+    }
 }
